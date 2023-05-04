@@ -5,7 +5,7 @@ import { useLevel } from "../LevelContext";
 export default function LevelCard({ level }) {
   const characters = level.toFind.map((char) => (
     <li key={uuidv4()}>
-      <img src={char} alt="character" />
+      <img src={char.logo} alt="character" />
     </li>
   ));
   const { setLevel } = useLevel();
@@ -20,7 +20,7 @@ export default function LevelCard({ level }) {
       <img src={level.pic} alt={level.difficulty} />
       <div>
         <h2>
-          <span>Difficulty Level:</span> {level.difficulty}
+          <span>Level:</span> {level.difficulty}
         </h2>
         <ul>{characters}</ul>
       </div>
