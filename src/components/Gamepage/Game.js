@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLevel } from "../LevelContext";
 import GameNav from "./GameNav";
 import CharPick from "./CharPick";
-import { setData } from "../proportions";
 import { doc, getDoc } from "firebase/firestore";
 import db from "../../firebase-config";
 import check from "../../images/check.png";
 import { v4 as uuidv4 } from "uuid";
+import Popup from "./Popup";
 
 export default function Game() {
   const { currentLevel } = useLevel();
@@ -17,16 +17,13 @@ export default function Game() {
       return { name: char.name, found: false };
     })
   );
+  const [allFound, setAllFound] = useState(false);
+  const [time, setTime] = useState(0);
   const imgRef = useRef(null);
-
-  useEffect(() => {
-    setData();
-  }, []);
 
   const getData = async (id) => {
     const docRef = doc(db, "levelProps", `level${id}`);
     const docSnap = await getDoc(docRef);
-    console.log(docSnap.data().chars);
     return docSnap.data().chars;
   };
 
@@ -62,7 +59,6 @@ export default function Game() {
   const validateCustomPick = async (optionName) => {
     const currentData = await getData(currentLevel.id);
     const pickedObj = currentData.find((obj) => obj.name === optionName);
-    console.log(pickedObj);
     if (inbounds(pickedObj)) {
       const newList = charsList.map((char) => {
         if (char.name === pickedObj.name) {
@@ -77,6 +73,11 @@ export default function Game() {
       });
       setCharsList(newList);
     } else alert(`Uh oh... ${pickedObj.name} isn't there!`);
+  };
+
+  const checkForWin = () => {
+    const anyLeft = charsList.find((char) => !char.found);
+    if (!anyLeft) setAllFound(true);
   };
 
   const picks = charsList.map((char) => {
@@ -95,6 +96,22 @@ export default function Game() {
         </li>
       );
     }
+  });
+
+  useEffect(() => {
+    checkForWin();
+  }, [charsList]);
+
+  useEffect(() => {
+    const timerInterval = setInterval(() => {
+      setTime((prevTime) => prevTime + 1);
+    }, 1000);
+    return () => clearInterval(timerInterval);
+  }, []);
+
+  const fomrattedTime = new Date(time * 1000).toLocaleTimeString([], {
+    minute: "2-digit",
+    second: "2-digit",
   });
 
   return (
@@ -116,6 +133,10 @@ export default function Game() {
           <CharPick location={clickLocation} handleCharPick={handleCharPick} />
         )}
         <ul className="checks">{picks}</ul>
+        {/* <button className="test" onClick={() => setAllFound(true)}>
+          Test modal
+        </button> */}
+        {allFound && <Popup time={fomrattedTime} />}
       </div>
     )
   );

@@ -59,7 +59,8 @@ body,
   gap: 1rem;
 }
 
-.GameNav button {
+.GameNav button,
+form button {
   font-size: 2rem;
   font-weight: bold;
   background-color: rgb(230, 82, 82);
@@ -211,4 +212,43 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+dialog,
+.test {
+  position: fixed;
+  margin: 0;
+  padding: 2rem;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  background: whitesmoke;
+  border-radius: 0.25rem;
+  z-index: 10;
+}
+
+form {
+  display: flex;
+  gap: 1.3rem;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem;
+  color: rgb(230, 82, 82);
+  font-weight: bold;
+}
+
+label {
+  border-bottom: 1px solid rgb(230, 82, 82);
+}
+
+form button {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+input {
+  width: 90%;
+  color: rgb(230, 82, 82);
+  font-size: 1.5rem;
+  font-weight: 500;
 }
