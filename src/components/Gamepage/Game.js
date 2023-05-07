@@ -2,7 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLevel } from "../LevelContext";
 import GameNav from "./GameNav";
 import CharPick from "./CharPick";
-import { proportions } from "../proportions";
+import { setData } from "../proportions";
+import { doc, getDoc } from "firebase/firestore";
+import db from "../../firebase-config";
+import check from "../../images/check.png";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Game() {
   const { currentLevel } = useLevel();
@@ -14,6 +18,17 @@ export default function Game() {
     })
   );
   const imgRef = useRef(null);
+
+  useEffect(() => {
+    setData();
+  }, []);
+
+  const getData = async (id) => {
+    const docRef = doc(db, "levelProps", `level${id}`);
+    const docSnap = await getDoc(docRef);
+    console.log(docSnap.data().chars);
+    return docSnap.data().chars;
+  };
 
   const handlePicks = (e) => {
     if (picking) {
@@ -27,7 +42,7 @@ export default function Game() {
   };
 
   const handleCharPick = (option) => {
-    validatePick(option.name);
+    validateCustomPick(option.name);
     setPicking(false);
   };
 
@@ -44,74 +59,43 @@ export default function Game() {
     );
   };
 
-  // Need to optimize this to scale
-  const validatePick = (optionName) => {
-    if (currentLevel.id === 1) {
-      const pickedObj = proportions.level1.find(
-        (obj) => obj.name === optionName
-      );
-      console.log(pickedObj);
-      if (inbounds(pickedObj)) {
-        const newList = charsList.map((char) => {
-          if (char.name === pickedObj.name) {
-            return { ...char, found: true };
-          } else {
-            return char;
-          }
-        });
-        setCharsList(newList);
-      }
-    }
-    if (currentLevel.id === 2) {
-      const pickedObj = proportions.level2.find(
-        (obj) => obj.name === optionName
-      );
-      console.log(pickedObj);
-      if (inbounds(pickedObj)) {
-        const newList = charsList.map((char) => {
-          if (char.name === pickedObj.name) {
-            return { ...char, found: true };
-          } else {
-            return char;
-          }
-        });
-        setCharsList(newList);
-      }
-    }
-    if (currentLevel.id === 3) {
-      const pickedObj = proportions.level3.find(
-        (obj) => obj.name === optionName
-      );
-      console.log(pickedObj);
-      if (inbounds(pickedObj)) {
-        const newList = charsList.map((char) => {
-          if (char.name === pickedObj.name) {
-            return { ...char, found: true };
-          } else {
-            return char;
-          }
-        });
-        setCharsList(newList);
-      }
-    }
+  const validateCustomPick = async (optionName) => {
+    const currentData = await getData(currentLevel.id);
+    const pickedObj = currentData.find((obj) => obj.name === optionName);
+    console.log(pickedObj);
+    if (inbounds(pickedObj)) {
+      const newList = charsList.map((char) => {
+        if (char.name === pickedObj.name) {
+          return {
+            ...char,
+            found: true,
+            locatedAt: { x: clickLocation.x, y: clickLocation.y },
+          };
+        } else {
+          return char;
+        }
+      });
+      setCharsList(newList);
+    } else alert(`Uh oh... ${pickedObj.name} isn't there!`);
   };
 
-  // useEffect(() => {
-  //   console.log(clickLocation);
-  //   console.log(imgRef);
-  //   console.log(charsList);
-  // });
-
-  // const getProportions = () => {
-  //   return {
-  //     edge: {
-  //       edgeX:
-  //         (clickLocation.x - imgRef.current.offsetLeft) / imgRef.current.width,
-  //       edgeY:
-  //         (clickLocation.y - imgRef.current.offsetTop) / imgRef.current.height,
-  //     },
-  //   };
-  // };
+  const picks = charsList.map((char) => {
+    if (char.found) {
+      return (
+        <li key={uuidv4()}>
+          <img
+            style={{
+              position: "absolute",
+              top: char.locatedAt.y,
+              left: char.locatedAt.x,
+            }}
+            src={check}
+            alt="check"
+          />
+        </li>
+      );
+    }
+  });
 
   return (
     currentLevel && (
@@ -131,6 +115,7 @@ export default function Game() {
         {picking && (
           <CharPick location={clickLocation} handleCharPick={handleCharPick} />
         )}
+        <ul className="checks">{picks}</ul>
       </div>
     )
   );

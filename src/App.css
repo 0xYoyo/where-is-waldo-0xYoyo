@@ -156,6 +156,11 @@ button:hover {
   align-items: center;
 }
 
+.checks img {
+  max-height: 12vh;
+  transform: translate(-50%, -50%);
+}
+
 .board {
   width: 100%;
 }
