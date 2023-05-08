@@ -2,8 +2,10 @@ import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 import db from "../../firebase-config";
+import { useLevel } from "../LevelContext";
 
 export default function Popup({ time }) {
+  const { currentLevel } = useLevel();
   const modalRef = useRef(null);
   const inputRef = useRef(null);
   const navigate = useNavigate();
@@ -14,11 +16,10 @@ export default function Popup({ time }) {
     return () => dialog.close();
   }, []);
 
-  const allUsersRef = collection(db, "allUsers");
-
+  const allUsersRef = collection(db, `level${currentLevel.id}Users`);
   async function setUser(e) {
     e.preventDefault();
-    const docToCheckRef = doc(db, "allUsers", `${inputRef.current.value}`);
+    const docToCheckRef = doc(allUsersRef, `${inputRef.current.value}`);
     const docToCheckSnap = await getDoc(docToCheckRef);
 
     if (docToCheckSnap.exists()) {
@@ -29,7 +30,7 @@ export default function Popup({ time }) {
       await setDoc(doc(allUsersRef, `${inputRef.current.value}`), {
         user: { name: inputRef.current.value, timer: time },
       });
-      navigate("/");
+      navigate("/leaderboard");
     }
   }
 

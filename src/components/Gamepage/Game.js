@@ -109,7 +109,7 @@ export default function Game() {
     return () => clearInterval(timerInterval);
   }, []);
 
-  const fomrattedTime = new Date(time * 1000).toLocaleTimeString([], {
+  const formattedTime = new Date(time * 1000).toLocaleTimeString([], {
     minute: "2-digit",
     second: "2-digit",
   });
@@ -136,7 +136,7 @@ export default function Game() {
         {/* <button className="test" onClick={() => setAllFound(true)}>
           Test modal
         </button> */}
-        {allFound && <Popup time={fomrattedTime} />}
+        {allFound && <Popup time={formattedTime} />}
       </div>
     )
   );
