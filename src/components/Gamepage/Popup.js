@@ -37,6 +37,7 @@ export default function Popup({ time }) {
   return (
     <dialog ref={modalRef}>
       <form>
+        <h5>Time: {time}</h5>
         <label htmlFor="name">Enter your name:</label>
         <input ref={inputRef} type="text" id="name" required />
         <button type="submit" onClick={setUser}>

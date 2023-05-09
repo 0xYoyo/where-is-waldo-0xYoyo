@@ -103,11 +103,13 @@ export default function Game() {
   }, [charsList]);
 
   useEffect(() => {
-    const timerInterval = setInterval(() => {
-      setTime((prevTime) => prevTime + 1);
-    }, 1000);
-    return () => clearInterval(timerInterval);
-  }, []);
+    if (!allFound) {
+      const timerInterval = setInterval(() => {
+        setTime((prevTime) => prevTime + 1);
+      }, 1000);
+      return () => clearInterval(timerInterval);
+    }
+  }, [allFound]);
 
   const formattedTime = new Date(time * 1000).toLocaleTimeString([], {
     minute: "2-digit",
