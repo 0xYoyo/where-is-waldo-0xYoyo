@@ -1,6 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useLevel } from "../LevelContext";
+import { useLevel } from "../utils/LevelContext";
 
 export default function LevelCard({ level }) {
   const characters = level.toFind.map((char) => (

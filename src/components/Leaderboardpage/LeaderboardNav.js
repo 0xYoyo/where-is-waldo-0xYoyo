@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import waldoLogo from "../../images/waldoLogo.svg";
 import { Link } from "react-router-dom";
-import { useLevel } from "../LevelContext";
+import { useLevel } from "../utils/LevelContext";
 import { v4 as uuidv4 } from "uuid";
 
 export default function LeaderboardNav() {

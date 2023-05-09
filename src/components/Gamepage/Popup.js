@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 import db from "../../firebase-config";
-import { useLevel } from "../LevelContext";
+import { useLevel } from "../utils/LevelContext";
 
 export default function Popup({ time }) {
   const { currentLevel } = useLevel();

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLevel } from "../LevelContext";
+import { useLevel } from "../utils/LevelContext";
 import GameNav from "./GameNav";
 import CharPick from "./CharPick";
 import { doc, getDoc } from "firebase/firestore";

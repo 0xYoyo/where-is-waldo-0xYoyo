@@ -1,5 +1,5 @@
 import React from "react";
-import waldoLogo from "../images/waldoLogo.svg";
+import waldoLogo from "../../images/waldoLogo.svg";
 
 export default function Nav() {
   return (

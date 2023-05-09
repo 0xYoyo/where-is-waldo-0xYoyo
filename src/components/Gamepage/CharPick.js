@@ -1,5 +1,5 @@
 import React from "react";
-import { useLevel } from "../LevelContext";
+import { useLevel } from "../utils/LevelContext";
 import { v4 as uuidv4 } from "uuid";
 
 export default function CharPick({ location, handleCharPick }) {

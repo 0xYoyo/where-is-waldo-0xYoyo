@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import Nav from "../Nav";
-import { levelData } from "../levels";
+import Nav from "../utils/Nav";
+import { levelData } from "../utils/levels";
 import { v4 as uuidv4 } from "uuid";
 import LevelCard from "./LevelCard";
 import { Link } from "react-router-dom";
-import { useLevel } from "../LevelContext";
+import { useLevel } from "../utils/LevelContext";
 
 export default function Home() {
   const { setLevel } = useLevel();

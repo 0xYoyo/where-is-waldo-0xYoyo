@@ -1,10 +1,10 @@
-import level1 from "../images/level1.jpg";
-import level2 from "../images/level2.jpg";
-import level3 from "../images/level3.jpg";
-import waldo from "../images/waldo.png";
-import wizard from "../images/wizard.png";
-import odlaw from "../images/odlaw.png";
-import wenda from "../images/wenda.png";
+import level1 from "../../images/level1.jpg";
+import level2 from "../../images/level2.jpg";
+import level3 from "../../images/level3.jpg";
+import waldo from "../../images/waldo.png";
+import wizard from "../../images/wizard.png";
+import odlaw from "../../images/odlaw.png";
+import wenda from "../../images/wenda.png";
 
 export const levelData = [
   {

@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Homepage/Home";
 import Game from "./components/Gamepage/Game";
 import Leaderboard from "./components/Leaderboardpage/Leaderboard";
-import { LevelProvider } from "./components/LevelContext";
+import { LevelProvider } from "./components/utils/LevelContext";
+import PrivateRoutes from "./components/utils/PrivateRoutes";
 
 function App() {
   // const [logoY, setLogoY] = useState(0);
@@ -16,8 +17,10 @@ function App() {
         <LevelProvider>
           <Routes>
             <Route element={<Home />} path="/"></Route>
-            <Route element={<Game />} path="/game"></Route>
-            <Route element={<Leaderboard />} path="/leaderboard"></Route>
+            <Route element={<PrivateRoutes />}>
+              <Route element={<Game />} path="/game"></Route>
+              <Route element={<Leaderboard />} path="/leaderboard"></Route>
+            </Route>
           </Routes>
         </LevelProvider>
       </Router>
