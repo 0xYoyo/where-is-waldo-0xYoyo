@@ -3,6 +3,8 @@ import { useLevel } from "../LevelContext";
 import { collection, getDocs, query } from "firebase/firestore";
 import db from "../../firebase-config";
 import { v4 as uuidv4 } from "uuid";
+import LeaderboardNav from "./LeaderboardNav";
+import Score from "./Score";
 
 export default function Leaderboard() {
   const { currentLevel } = useLevel();
@@ -36,16 +38,25 @@ export default function Leaderboard() {
 
   const scores = scoreList.map((score) => (
     <li key={uuidv4()}>
-      <p>
-        {score.name} - {score.timer}
-      </p>
+      <Score scoreName={score.name} scoreTime={score.timer} />
     </li>
   ));
 
   return (
-    <div>
-      <h1>Top 10</h1>
-      <ul>{scores}</ul>
+    <div className="Leaderboard">
+      <LeaderboardNav />
+      <div className="contents">
+        <h1 className="scoreHead">Leaderboard - Top 10</h1>
+        <ul>
+          <li>
+            <div className="desc">
+              <h3>Name</h3>
+              <h3>Time</h3>
+            </div>
+          </li>
+          {scores}
+        </ul>
+      </div>
     </div>
   );
 }
