@@ -5,6 +5,7 @@ import Game from "./components/Gamepage/Game";
 import Leaderboard from "./components/Leaderboardpage/Leaderboard";
 import { LevelProvider } from "./components/utils/LevelContext";
 import PrivateRoutes from "./components/utils/PrivateRoutes";
+import NotFound from "./components/NotFound";
 
 function App() {
   // const [logoY, setLogoY] = useState(0);
@@ -21,6 +22,7 @@ function App() {
               <Route element={<Game />} path="/game"></Route>
               <Route element={<Leaderboard />} path="/leaderboard"></Route>
             </Route>
+            <Route element={<NotFound />} path="*"></Route>
           </Routes>
         </LevelProvider>
       </Router>

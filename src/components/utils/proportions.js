@@ -1,5 +1,8 @@
+// Contains initial character proportion settings
+
+/*
 import { collection, doc, setDoc } from "firebase/firestore";
-import db from "../firebase-config";
+import db from "../../firebase-config";
 
 const levelPropsRef = collection(db, "levelProps");
 
@@ -81,4 +84,5 @@ export async function setData() {
       },
     ],
   });
-}
+} 
+*/

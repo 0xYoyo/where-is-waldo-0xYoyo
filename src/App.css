@@ -319,3 +319,34 @@ input {
   color: whitesmoke;
   border: 1px solid whitesmoke;
 }
+
+.NotFound {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.NotFound img {
+  max-width: 80%;
+}
+
+.NotFound button {
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: rgb(102, 102, 245);
+  border-radius: 10px;
+  border: none;
+  color: whitesmoke;
+  padding: 1rem 1.5rem;
+  border: 2px solid rgb(79, 79, 223);
+}
+
+.NotFound button a {
+  color: whitesmoke;
+}
