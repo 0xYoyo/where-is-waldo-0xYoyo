@@ -105,6 +105,8 @@ button:hover {
 }
 
 .levelDisplay ul {
+  margin: 0 auto;
+  max-width: 1500px;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 2rem;
@@ -132,9 +134,10 @@ button:hover {
 }
 
 .LevelCard h2 {
-  color: rgb(48, 48, 230);
+  color: rgb(79, 79, 223);
   text-align: center;
   border-bottom: 1px solid whitesmoke;
+  padding-left: 4px;
 }
 
 .LevelCard span {
@@ -167,7 +170,7 @@ button:hover {
 }
 
 .checks img {
-  max-height: 12vh;
+  max-height: 6rem;
   transform: translate(-50%, -50%);
 }
 
@@ -177,6 +180,7 @@ button:hover {
 
 .container {
   width: 90%;
+  max-width: 1500px;
   padding: 2rem 0;
 }
 
@@ -276,6 +280,7 @@ input {
 
 .contents {
   width: 70%;
+  max-width: 1500px;
 }
 
 .contents ul {
