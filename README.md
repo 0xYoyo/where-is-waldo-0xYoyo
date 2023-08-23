@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Description
 
-The project is a recreation of the popular game "Where's Waldo"./
+The project is a recreation of the popular game "Where's Waldo".\
 In the game the user is required to detect and pinpoint all the hidden characters in order to win and _hopefully_ get their name on the leader board.
 
 ## Technologies
